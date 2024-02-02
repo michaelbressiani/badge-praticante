@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,30 +13,41 @@
             <objects>
                 <viewController storyboardIdentifier="ListCredCardsViewController" id="Y6W-OH-hqX" customClass="ListCredCardsViewController" customModule="Pan_CredCard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xu9-it-udB">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="482"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zR9-R5-IWu">
+                                <rect key="frame" x="0.0" y="25" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="qCr-oI-eSR"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xu9-it-udB" secondAttribute="trailing" id="6p6-0S-EF1"/>
+                            <constraint firstItem="xu9-it-udB" firstAttribute="top" secondItem="zR9-R5-IWu" secondAttribute="bottom" constant="5" id="SiY-f4-C17"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xu9-it-udB" secondAttribute="bottom" id="WXF-ru-Nbl"/>
-                            <constraint firstItem="xu9-it-udB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="cum-QB-cm5"/>
+                            <constraint firstItem="zR9-R5-IWu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gaq-Zf-Mym"/>
+                            <constraint firstItem="zR9-R5-IWu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="lJd-MZ-GoD"/>
+                            <constraint firstItem="zR9-R5-IWu" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="u4G-af-fvL"/>
                             <constraint firstItem="xu9-it-udB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="x65-bd-kJG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="listCredCardsTableView" destination="xu9-it-udB" id="A3u-wY-7Ts"/>
+                        <outlet property="searchCardSearchBar" destination="zR9-R5-IWu" id="2xs-91-hUB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="4"/>
+            <point key="canvasLocation" x="138.75" y="3.1690140845070425"/>
         </scene>
     </scenes>
     <resources>

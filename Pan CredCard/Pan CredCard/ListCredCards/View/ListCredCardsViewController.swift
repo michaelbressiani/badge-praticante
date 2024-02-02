@@ -8,6 +8,7 @@ import UIKit
 
 class ListCredCardsViewController: UIViewController {
     
+    @IBOutlet weak var searchCardSearchBar: UISearchBar!
     @IBOutlet weak var listCredCardsTableView: UITableView!
     
     private var viewModel: ListCredCardsViewModel = ListCredCardsViewModel()
@@ -16,6 +17,7 @@ class ListCredCardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialConfigs()
+        configSeachBar()
         viewModel.delegate = self
         viewModel.fetchCardsMock()
     }
@@ -32,6 +34,10 @@ class ListCredCardsViewController: UIViewController {
         listCredCardsTableView.dataSource = self
         listCredCardsTableView.register(CredCardsTableViewCell.nib(), forCellReuseIdentifier: CredCardsTableViewCell.identifier)
         listCredCardsTableView.reloadData()
+    }
+    
+    private func configSeachBar() {
+        searchCardSearchBar.placeholder = "Digite o nome do cartão"
     }
     
     private func errorRequestAPI() {
@@ -90,5 +96,10 @@ extension ListCredCardsViewController: CardsViewModelProtocol {
     
     func successRequest() {
         configTableView()
+    }
+}
+
+extension ListCredCardsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
     }
 }

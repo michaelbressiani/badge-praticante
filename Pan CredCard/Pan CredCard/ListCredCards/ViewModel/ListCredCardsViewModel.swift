@@ -38,6 +38,10 @@ class ListCredCardsViewModel {
         return cards?.cards[indexPath.row] ?? cardEmpty
     }
     
+    public func cardList() -> [Card] {
+        return cards?.cards ?? [cardEmpty]
+    }
+    
     public func convertBase64ToImage(base64String: String) -> UIImage {
         if let data = Data(base64Encoded: base64String, options: .ignoreUnknownCharacters) {
             if let image = UIImage(data: data) {

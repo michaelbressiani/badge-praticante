@@ -13,6 +13,8 @@ class ListCredCardsViewController: UIViewController {
     
     private var viewModel: ListCredCardsViewModel = ListCredCardsViewModel()
     private var secureStorageCard: SecureStorageCard = SecureStorageCard()
+    private var searchCardName: [Card] = []
+    private var searching: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,14 +69,21 @@ class ListCredCardsViewController: UIViewController {
 extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRows()
+        if searching {
+            return searchCardName.count
+        } else {
+            return viewModel.numberOfRows()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CredCardsTableViewCell.identifier, for: indexPath) as? CredCardsTableViewCell
         
-        cell?.setupCell(card: viewModel.getCardList(indexPath: indexPath))
-        
+        if searching {
+            cell?.setupCell(card: searchCardName[indexPath.row])
+        } else {
+            cell?.setupCell(card: viewModel.getCardList(indexPath: indexPath))
+        }
         return cell ?? UITableViewCell()
     }
     
@@ -89,6 +98,19 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
+extension ListCredCardsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+    }
+}
+
+extension ListCredCardsViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCardName = viewModel.cardList().filter({$0.name.prefix(searchText.count) == searchText })
+        searching = true
+        listCredCardsTableView.reloadData()
+    }
+}
+
 extension ListCredCardsViewController: CardsViewModelProtocol {
     func errorRequest() {
         errorRequestAPI()
@@ -99,7 +121,4 @@ extension ListCredCardsViewController: CardsViewModelProtocol {
     }
 }
 
-extension ListCredCardsViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-    }
-}
+

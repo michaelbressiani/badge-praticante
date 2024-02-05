@@ -20,6 +20,7 @@ class ListCredCardsViewController: UIViewController {
         super.viewDidLoad()
         initialConfigs()
         configSeachBar()
+        configTableView()
         viewModel.delegate = self
         viewModel.fetchCardsMock()
     }
@@ -39,6 +40,7 @@ class ListCredCardsViewController: UIViewController {
     }
     
     private func configSeachBar() {
+        searchCardSearchBar.delegate = self
         searchCardSearchBar.placeholder = "Digite o nome do cartão"
     }
     
@@ -69,28 +71,34 @@ class ListCredCardsViewController: UIViewController {
 extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
-            return searchCardName.count
-        } else {
-            return viewModel.numberOfRows()
-        }
+        
+        let cardList = viewModel.cardList()
+        let indexPath = IndexPath(row: 0, section: 0)
+        let numbersOfRows = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["rows"] as? Int ?? 0
+        
+        return numbersOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CredCardsTableViewCell.identifier, for: indexPath) as? CredCardsTableViewCell
         
-        if searching {
-            cell?.setupCell(card: searchCardName[indexPath.row])
-        } else {
-            cell?.setupCell(card: viewModel.getCardList(indexPath: indexPath))
-        }
+        let cardList = viewModel.cardList()
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["card"] as? Card
+        
+        cell?.setupCell(card: resultCard ?? viewModel.cardEmpty)
+        
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        secureStorageCard.saveCardToKeychain(card: viewModel.getCardList(indexPath: indexPath))
-        navegationToDetailsCard(card: viewModel.getCardList(indexPath: indexPath))
+        
+        let cardList = viewModel.cardList()
+        secureStorageCard.saveCardToKeychain(card: cardList[indexPath.row])
+        
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["card"] as? Card
+        
+        navegationToDetailsCard(card: resultCard ?? viewModel.cardEmpty)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,7 +113,7 @@ extension ListCredCardsViewController: UISearchResultsUpdating {
 
 extension ListCredCardsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchCardName = viewModel.cardList().filter({$0.name.prefix(searchText.count) == searchText })
+        searchCardName = viewModel.cardListFilterName(searchText: searchText)
         searching = true
         listCredCardsTableView.reloadData()
     }

@@ -41,6 +41,7 @@ class ListCredCardsViewController: UIViewController {
     
     private func configSeachBar() {
         searchCardSearchBar.delegate = self
+        searchCardSearchBar.backgroundImage = UIImage()
         searchCardSearchBar.placeholder = "Digite o nome do cartão"
     }
     

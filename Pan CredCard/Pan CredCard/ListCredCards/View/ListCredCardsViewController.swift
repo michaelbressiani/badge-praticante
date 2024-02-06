@@ -25,6 +25,17 @@ class ListCredCardsViewController: UIViewController {
         viewModel.fetchCardsMock()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UITableView.animate(withDuration: 0.5) {
+            self.listCredCardsTableView.alpha = 1
+        }
+        UISearchBar.animate(withDuration: 0.5) {
+            self.searchCardSearchBar.alpha = 1
+        }
+    }
+    
     private func initialConfigs() {
         self.navigationItem.hidesBackButton = true
         view.backgroundColor = UIColor.systemBackground
@@ -32,6 +43,7 @@ class ListCredCardsViewController: UIViewController {
     }
     
     private func configTableView() {
+        listCredCardsTableView.alpha = 0
         listCredCardsTableView.separatorStyle = .none
         listCredCardsTableView.delegate = self
         listCredCardsTableView.dataSource = self
@@ -40,6 +52,7 @@ class ListCredCardsViewController: UIViewController {
     }
     
     private func configSeachBar() {
+        searchCardSearchBar.alpha = 0
         searchCardSearchBar.delegate = self
         searchCardSearchBar.backgroundImage = UIImage()
         searchCardSearchBar.placeholder = "Digite o nome do cartão"

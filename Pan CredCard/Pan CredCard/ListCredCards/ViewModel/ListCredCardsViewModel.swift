@@ -30,8 +30,17 @@ class ListCredCardsViewModel {
         }
     }
     
-    public func numberOfRows() -> Int {
-        return cards?.cards.count ?? 0
+//    public func numberOfRows() -> Int {
+//        return cards?.cards.count ?? 0
+//    }
+    
+    public func numberOfRows(searching: Bool, searchCardName: [Card], cardList: [Card]) -> Int {
+        
+        if searching {
+            return searchCardName.count
+        } else {
+            return cardList.count
+        }
     }
     
     public func cardList() -> [Card] {
@@ -42,12 +51,12 @@ class ListCredCardsViewModel {
         return cards?.cards.filter({$0.name.prefix(searchText.count) == searchText }) ?? [cardEmpty]
     }
     
-    public func cardFilterConfig(searching: Bool, searchCardName: [Card], cardList: [Card], indexPath: IndexPath) -> [String: Any] {
+    public func cardFilterConfig(searching: Bool, searchCardName: [Card], cardList: [Card], indexPath: IndexPath) -> Card {
         
         if searching {
-            return ["card": searchCardName[indexPath.row], "rows": searchCardName.count]
+            return searchCardName[indexPath.row]
         } else {
-            return ["card": cardList[indexPath.row], "rows": cardList.count]
+            return cardList[indexPath.row]
         }
     }
     

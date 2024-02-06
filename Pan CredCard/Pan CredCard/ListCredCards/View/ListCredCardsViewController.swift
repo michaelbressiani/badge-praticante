@@ -73,8 +73,7 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let cardList = viewModel.cardList()
-        let indexPath = IndexPath(row: 0, section: 0)
-        let numbersOfRows = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["rows"] as? Int ?? 0
+        let numbersOfRows = viewModel.numberOfRows(searching: searching, searchCardName: searchCardName, cardList: cardList)
         
         return numbersOfRows
     }
@@ -83,9 +82,9 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: CredCardsTableViewCell.identifier, for: indexPath) as? CredCardsTableViewCell
         
         let cardList = viewModel.cardList()
-        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["card"] as? Card
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
         
-        cell?.setupCell(card: resultCard ?? viewModel.cardEmpty)
+        cell?.setupCell(card: resultCard)
         
         return cell ?? UITableViewCell()
     }
@@ -96,9 +95,9 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
         let cardList = viewModel.cardList()
         secureStorageCard.saveCardToKeychain(card: cardList[indexPath.row])
         
-        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)["card"] as? Card
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
         
-        navegationToDetailsCard(card: resultCard ?? viewModel.cardEmpty)
+        navegationToDetailsCard(card: resultCard)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

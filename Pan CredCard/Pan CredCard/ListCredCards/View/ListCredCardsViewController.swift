@@ -111,6 +111,14 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
         
         let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
         
+        UITableView.animate(withDuration: 0.5) {
+                    self.listCredCardsTableView.alpha = 0
+                }
+        
+        UISearchBar.animate(withDuration: 0.5) {
+            self.searchCardSearchBar.alpha = 0
+        }
+        
         navegationToDetailsCard(card: resultCard)
     }
     

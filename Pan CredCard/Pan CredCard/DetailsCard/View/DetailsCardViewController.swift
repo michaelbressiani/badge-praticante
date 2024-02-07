@@ -9,6 +9,7 @@ import UIKit
 
 class DetailsCardViewController: UIViewController {
     
+    @IBOutlet weak var contentViewUIView: UIView!
     @IBOutlet weak var cardImageImageView: UIImageView!
     @IBOutlet weak var titleCardNameLabel: UILabel!
     @IBOutlet weak var cardNameLabel: UILabel!
@@ -18,9 +19,9 @@ class DetailsCardViewController: UIViewController {
     @IBOutlet weak var cardNumberLabel: UILabel!
     @IBOutlet weak var titleCardCodSecLabel: UILabel!
     @IBOutlet weak var cardCodSecLabel: UILabel!
-    
     @IBOutlet weak var titleCardIsCreditOrIsDebitLabel: UILabel!
     @IBOutlet weak var cardIsCreditOrIsDebitLabel: UILabel!
+    
     
     private var cardName: String = ""
     private var card: Card = Card(id: 0, name: "", alias: "", credit: false, debit: false, number: "", codSec: "", image: "")
@@ -41,7 +42,17 @@ class DetailsCardViewController: UIViewController {
         accessebilityLabels()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.contentViewUIView.alpha = 1
+        }
+    }
+    
     private func elementsConfig() {
+        
+        contentViewUIView.alpha = 0
         
         cardImageImageView.image = viewModel.convertBase64ToImage(base64String: card.image)
         

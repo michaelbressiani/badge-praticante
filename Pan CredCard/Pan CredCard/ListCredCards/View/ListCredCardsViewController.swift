@@ -39,7 +39,6 @@ class ListCredCardsViewController: UIViewController {
     private func initialConfigs() {
         self.navigationItem.hidesBackButton = true
         view.backgroundColor = UIColor.systemBackground
-        navigationItem.backButtonTitle = ""
     }
     
     private func configTableView() {

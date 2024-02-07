@@ -40,6 +40,7 @@ class DetailsCardViewController: UIViewController {
         super.viewDidLoad()
         elementsConfig()
         accessebilityLabels()
+        backNavegationFadeOut()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +49,21 @@ class DetailsCardViewController: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.contentViewUIView.alpha = 1
         }
+    }
+    
+    private func backNavegationFadeOut() {
+        let backButtonNavegation = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backActionNavegation))
+        self.navigationItem.leftBarButtonItem = backButtonNavegation
+    }
+    
+    @objc func backActionNavegation() {
+        UIView.animate(withDuration: 0.5) {
+            self.contentViewUIView.alpha = 0
+        }
+            
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        self.navigationController?.popViewController(animated: true)
+        })
     }
     
     private func elementsConfig() {

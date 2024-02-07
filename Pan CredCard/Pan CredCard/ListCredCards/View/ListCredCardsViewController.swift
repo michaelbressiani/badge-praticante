@@ -77,7 +77,17 @@ class ListCredCardsViewController: UIViewController {
             return DetailsCardViewController(coder: coder, card: card)
         }
         
-        self.navigationController?.pushViewController(vcString, animated: true)
+        UITableView.animate(withDuration: 0.5) {
+                    self.listCredCardsTableView.alpha = 0
+                }
+        
+        UISearchBar.animate(withDuration: 0.5) {
+            self.searchCardSearchBar.alpha = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.navigationController?.pushViewController(vcString, animated: true)
+        })
     }
 }
 
@@ -109,14 +119,6 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
         secureStorageCard.saveCardToKeychain(card: cardList[indexPath.row])
         
         let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
-        
-        UITableView.animate(withDuration: 0.5) {
-                    self.listCredCardsTableView.alpha = 0
-                }
-        
-        UISearchBar.animate(withDuration: 0.5) {
-            self.searchCardSearchBar.alpha = 0
-        }
         
         navegationToDetailsCard(card: resultCard)
     }

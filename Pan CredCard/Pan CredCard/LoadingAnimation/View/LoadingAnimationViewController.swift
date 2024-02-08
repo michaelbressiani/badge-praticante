@@ -14,12 +14,16 @@ class LoadingAnimationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initialConfigs()
         viewModel.delegate = self
         viewModel.fetchCardsMock()
-        
         loadingViewActivityIndicatorView.style = UIActivityIndicatorView.Style.large
         loadingViewActivityIndicatorView.startAnimating()
+    }
+    
+    private func initialConfigs() {
+        self.navigationItem.hidesBackButton = true
+        view.backgroundColor = UIColor.systemBackground
     }
     
     private func errorRequestAPI() {

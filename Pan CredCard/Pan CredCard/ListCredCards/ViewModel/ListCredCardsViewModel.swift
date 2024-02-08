@@ -21,8 +21,8 @@ class ListCredCardsViewModel {
         }
     }
     
-    public func cardListFilterName(searchText: String) -> [Card] {
-        return cards?.cards.filter({$0.name.prefix(searchText.count) == searchText }) ?? [cardEmpty]
+    public func cardListFilterName(searchText: String, listCards: [Card]) -> [Card] {
+        return listCards.filter({$0.name.prefix(searchText.count) == searchText })
     }
     
     public func cardFilterConfig(searching: Bool, searchCardName: [Card], listCards: [Card], indexPath: IndexPath) -> Card {

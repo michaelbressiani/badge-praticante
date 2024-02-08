@@ -114,8 +114,6 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
         
         let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, listCards: listCards, indexPath: indexPath)
         
-        print(resultCard)
-        
         navegationToDetailsCard(card: resultCard)
     }
     
@@ -131,8 +129,8 @@ extension ListCredCardsViewController: UISearchResultsUpdating {
 
 extension ListCredCardsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchCardName = viewModel.cardListFilterName(searchText: searchText)
         searching = true
+        searchCardName = viewModel.cardListFilterName(searchText: searchText, listCards: listCards)
         listCredCardsTableView.reloadData()
     }
 }

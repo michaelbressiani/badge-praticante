@@ -8,6 +8,7 @@ import UIKit
 
 class ListCredCardsViewController: UIViewController {
     
+
     @IBOutlet weak var searchCardSearchBar: UISearchBar!
     @IBOutlet weak var listCredCardsTableView: UITableView!
     
@@ -15,14 +16,22 @@ class ListCredCardsViewController: UIViewController {
     private var secureStorageCard: SecureStorageCard = SecureStorageCard()
     private var searchCardName: [Card] = []
     private var searching: Bool = false
+    private var listCards: [Card] = [Card(id: 0, name: "", alias: "", credit: false, debit: false, number: "", codSec: "", image: "")]
+    
+    init?(coder: NSCoder, listCards: [Card]) {
+        self.listCards = listCards
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initialConfigs()
         configSeachBar()
         configTableView()
-        viewModel.delegate = self
-        viewModel.fetchCardsMock()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +56,7 @@ class ListCredCardsViewController: UIViewController {
         listCredCardsTableView.delegate = self
         listCredCardsTableView.dataSource = self
         listCredCardsTableView.register(CredCardsTableViewCell.nib(), forCellReuseIdentifier: CredCardsTableViewCell.identifier)
+        
         listCredCardsTableView.reloadData()
     }
     
@@ -55,19 +65,6 @@ class ListCredCardsViewController: UIViewController {
         searchCardSearchBar.delegate = self
         searchCardSearchBar.backgroundImage = UIImage()
         searchCardSearchBar.placeholder = "Digite o nome do cartão"
-    }
-    
-    private func errorRequestAPI() {
-        
-        let alert: UIAlertController  = UIAlertController(title: "Fora de serviço", message: "", preferredStyle: .alert)
-        
-        let action: UIAlertAction = UIAlertAction(title: "Sair", style: .default) {
-            (action) in exit(0)
-        }
-        
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
     }
     
     private func navegationToDetailsCard(card: Card) {
@@ -95,8 +92,7 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let cardList = viewModel.cardList()
-        let numbersOfRows = viewModel.numberOfRows(searching: searching, searchCardName: searchCardName, cardList: cardList)
+        let numbersOfRows = viewModel.numberOfRows(searching: searching, searchCardName: searchCardName, listCards: listCards)
         
         return numbersOfRows
     }
@@ -104,8 +100,7 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CredCardsTableViewCell.identifier, for: indexPath) as? CredCardsTableViewCell
         
-        let cardList = viewModel.cardList()
-        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, listCards: listCards, indexPath: indexPath)
         
         cell?.setupCell(card: resultCard)
         
@@ -115,10 +110,11 @@ extension ListCredCardsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let cardList = viewModel.cardList()
-        secureStorageCard.saveCardToKeychain(card: cardList[indexPath.row])
+        secureStorageCard.saveCardToKeychain(card: listCards[indexPath.row])
         
-        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, cardList: cardList, indexPath: indexPath)
+        let resultCard = viewModel.cardFilterConfig(searching: searching, searchCardName: searchCardName, listCards: listCards, indexPath: indexPath)
+        
+        print(resultCard)
         
         navegationToDetailsCard(card: resultCard)
     }
@@ -138,16 +134,6 @@ extension ListCredCardsViewController: UISearchBarDelegate {
         searchCardName = viewModel.cardListFilterName(searchText: searchText)
         searching = true
         listCredCardsTableView.reloadData()
-    }
-}
-
-extension ListCredCardsViewController: CardsViewModelProtocol {
-    func errorRequest() {
-        errorRequestAPI()
-    }
-    
-    func successRequest() {
-        configTableView()
     }
 }
 

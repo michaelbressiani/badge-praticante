@@ -6,57 +6,31 @@
 
 import UIKit
 
-protocol CardsViewModelProtocol: AnyObject {
-    func successRequest()
-    func errorRequest()
-}
-
 class ListCredCardsViewModel {
     
     private var service = CardsService()
     public var cards: ListCards?
-    weak var delegate: CardsViewModelProtocol?
     public var cardEmpty: Card = Card(id: 0, name: "", alias: "", credit: false, debit: false, number: "", codSec: "", image: "")
     
-    public func fetchCardsMock() {
-        service.getCardsMock { result in
-            switch result {
-            case .success(let success):
-                self.cards = success
-                self.delegate?.successRequest()
-            case .failure(_):
-                self.delegate?.errorRequest()
-            }
-        }
-    }
-    
-//    public func numberOfRows() -> Int {
-//        return cards?.cards.count ?? 0
-//    }
-    
-    public func numberOfRows(searching: Bool, searchCardName: [Card], cardList: [Card]) -> Int {
+    public func numberOfRows(searching: Bool, searchCardName: [Card], listCards: [Card]) -> Int {
         
         if searching {
             return searchCardName.count
         } else {
-            return cardList.count
+            return listCards.count
         }
-    }
-    
-    public func cardList() -> [Card] {
-        return cards?.cards ?? [cardEmpty]
     }
     
     public func cardListFilterName(searchText: String) -> [Card] {
         return cards?.cards.filter({$0.name.prefix(searchText.count) == searchText }) ?? [cardEmpty]
     }
     
-    public func cardFilterConfig(searching: Bool, searchCardName: [Card], cardList: [Card], indexPath: IndexPath) -> Card {
+    public func cardFilterConfig(searching: Bool, searchCardName: [Card], listCards: [Card], indexPath: IndexPath) -> Card {
         
         if searching {
             return searchCardName[indexPath.row]
         } else {
-            return cardList[indexPath.row]
+            return listCards[indexPath.row]
         }
     }
     

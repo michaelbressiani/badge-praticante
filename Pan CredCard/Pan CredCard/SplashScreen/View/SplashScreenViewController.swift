@@ -13,7 +13,7 @@ class SplashScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         elementsConfig()
-        navigationListCredCards()
+        navigationLoadingAnimation()
     }
     
     private func elementsConfig() {
@@ -23,9 +23,9 @@ class SplashScreenViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0/255.0, green: 176/255.0, blue: 240/255.0, alpha: 1.0)
     }
     
-    private func navigationListCredCards() {
-        let vcString = String(describing: ListCredCardsViewController.self)
-        let vc = UIStoryboard(name: vcString, bundle: nil).instantiateViewController(withIdentifier: vcString) as? ListCredCardsViewController
+    private func navigationLoadingAnimation() {
+        let vcString = String(describing: LoadingAnimationViewController.self)
+        let vc = UIStoryboard(name: vcString, bundle: nil).instantiateViewController(withIdentifier: vcString) as? LoadingAnimationViewController
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
             self.navigationController?.pushViewController(vc ?? UIViewController(), animated: true)

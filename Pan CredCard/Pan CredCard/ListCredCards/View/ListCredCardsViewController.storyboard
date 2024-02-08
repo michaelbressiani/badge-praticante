@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UMo-fu-8uC">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
@@ -9,45 +9,42 @@
     </dependencies>
     <scenes>
         <!--List Cred Cards View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <scene sceneID="Wy8-HK-zFJ">
             <objects>
-                <viewController storyboardIdentifier="ListCredCardsViewController" id="Y6W-OH-hqX" customClass="ListCredCardsViewController" customModule="Pan_CredCard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController storyboardIdentifier="ListCredCardsViewController" id="UMo-fu-8uC" customClass="ListCredCardsViewController" customModule="Pan_CredCard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CLr-BC-0UL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xu9-it-udB">
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KCq-Mb-B6D">
+                                <rect key="frame" x="0.0" y="20" width="320" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3V5-S7-c6F">
                                 <rect key="frame" x="0.0" y="76" width="320" height="492"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zR9-R5-IWu">
-                                <rect key="frame" x="0.0" y="20" width="320" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="qCr-oI-eSR"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <viewLayoutGuide key="safeArea" id="C1l-Xd-0Ck"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xu9-it-udB" secondAttribute="trailing" id="6p6-0S-EF1"/>
-                            <constraint firstItem="zR9-R5-IWu" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Fzx-JR-JPB"/>
-                            <constraint firstItem="xu9-it-udB" firstAttribute="top" secondItem="zR9-R5-IWu" secondAttribute="bottom" symbolic="YES" id="TwF-1p-4XS"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="xu9-it-udB" secondAttribute="bottom" id="WXF-ru-Nbl"/>
-                            <constraint firstItem="zR9-R5-IWu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="gaq-Zf-Mym"/>
-                            <constraint firstItem="zR9-R5-IWu" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="u4G-af-fvL"/>
-                            <constraint firstItem="xu9-it-udB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="x65-bd-kJG"/>
+                            <constraint firstItem="3V5-S7-c6F" firstAttribute="top" secondItem="KCq-Mb-B6D" secondAttribute="bottom" id="06h-RM-WXW"/>
+                            <constraint firstItem="3V5-S7-c6F" firstAttribute="trailing" secondItem="C1l-Xd-0Ck" secondAttribute="trailing" id="G4X-F5-7r2"/>
+                            <constraint firstItem="3V5-S7-c6F" firstAttribute="bottom" secondItem="C1l-Xd-0Ck" secondAttribute="bottom" id="XJB-cZ-EeP"/>
+                            <constraint firstItem="KCq-Mb-B6D" firstAttribute="trailing" secondItem="C1l-Xd-0Ck" secondAttribute="trailing" id="bMB-Ih-jCX"/>
+                            <constraint firstItem="KCq-Mb-B6D" firstAttribute="leading" secondItem="C1l-Xd-0Ck" secondAttribute="leading" id="ghn-QS-rhs"/>
+                            <constraint firstItem="KCq-Mb-B6D" firstAttribute="top" secondItem="C1l-Xd-0Ck" secondAttribute="top" id="lbc-ho-lSe"/>
+                            <constraint firstItem="3V5-S7-c6F" firstAttribute="leading" secondItem="C1l-Xd-0Ck" secondAttribute="leading" id="otq-pH-Mpx"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="listCredCardsTableView" destination="xu9-it-udB" id="A3u-wY-7Ts"/>
-                        <outlet property="searchCardSearchBar" destination="zR9-R5-IWu" id="2xs-91-hUB"/>
+                        <outlet property="listCredCardsTableView" destination="3V5-S7-c6F" id="DkN-56-wH8"/>
+                        <outlet property="searchCardSearchBar" destination="KCq-Mb-B6D" id="IPC-A1-GMt"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vEK-0U-GZx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="386" y="-2"/>
+            <point key="canvasLocation" x="-875.625" y="-68.661971830985919"/>
         </scene>
     </scenes>
     <resources>

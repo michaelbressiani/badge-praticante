@@ -6,11 +6,11 @@
 
 import UIKit
 
-class LoadingAnimationViewController: UIViewController {
+class LoadingAPIRequestViewController: UIViewController {
     
     @IBOutlet weak var loadingViewActivityIndicatorView: UIActivityIndicatorView!
     
-    private var viewModel: LoadingAnimationViewModel = LoadingAnimationViewModel()
+    private var viewModel: LoadingAPIRequestViewModel = LoadingAPIRequestViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +48,7 @@ class LoadingAnimationViewController: UIViewController {
     }
 }
 
-extension LoadingAnimationViewController: CardsViewModelProtocol {
+extension LoadingAPIRequestViewController: CardsViewModelProtocol {
     func errorRequest() {
         errorRequestAPI()
     }

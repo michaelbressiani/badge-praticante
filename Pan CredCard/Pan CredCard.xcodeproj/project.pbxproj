@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DF0B58282B74DE83002DEF8F /* LoadingAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B58272B74DE83002DEF8F /* LoadingAnimationViewController.swift */; };
-		DF0B582A2B74DE90002DEF8F /* LoadingAnimationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF0B58292B74DE90002DEF8F /* LoadingAnimationViewController.storyboard */; };
+		DF0B58282B74DE83002DEF8F /* LoadingAPIRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B58272B74DE83002DEF8F /* LoadingAPIRequestViewController.swift */; };
+		DF0B582A2B74DE90002DEF8F /* LoadingAPIRequestViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF0B58292B74DE90002DEF8F /* LoadingAPIRequestViewController.storyboard */; };
 		DF0B582E2B74E971002DEF8F /* LoadingAnimationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF0B582D2B74E971002DEF8F /* LoadingAnimationViewModel.swift */; };
 		DF1BF1052B665DF3004436DD /* ListCredCardsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1BF1042B665DF3004436DD /* ListCredCardsTests.swift */; };
 		DF1BF1082B667087004436DD /* ImageString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1BF1072B667087004436DD /* ImageString.swift */; };
@@ -45,8 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		DF0B58272B74DE83002DEF8F /* LoadingAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationViewController.swift; sourceTree = "<group>"; };
-		DF0B58292B74DE90002DEF8F /* LoadingAnimationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingAnimationViewController.storyboard; sourceTree = "<group>"; };
+		DF0B58272B74DE83002DEF8F /* LoadingAPIRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAPIRequestViewController.swift; sourceTree = "<group>"; };
+		DF0B58292B74DE90002DEF8F /* LoadingAPIRequestViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadingAPIRequestViewController.storyboard; sourceTree = "<group>"; };
 		DF0B582D2B74E971002DEF8F /* LoadingAnimationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimationViewModel.swift; sourceTree = "<group>"; };
 		DF1BF1042B665DF3004436DD /* ListCredCardsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCredCardsTests.swift; sourceTree = "<group>"; };
 		DF1BF1072B667087004436DD /* ImageString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageString.swift; sourceTree = "<group>"; };
@@ -93,13 +93,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DF0B58262B74DE33002DEF8F /* LoadingAnimation */ = {
+		DF0B58262B74DE33002DEF8F /* LoadingAPIRequest */ = {
 			isa = PBXGroup;
 			children = (
 				DF0B582C2B74E958002DEF8F /* View */,
 				DF0B582B2B74E950002DEF8F /* ViewModel */,
 			);
-			path = LoadingAnimation;
+			path = LoadingAPIRequest;
 			sourceTree = "<group>";
 		};
 		DF0B582B2B74E950002DEF8F /* ViewModel */ = {
@@ -113,8 +113,8 @@
 		DF0B582C2B74E958002DEF8F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DF0B58272B74DE83002DEF8F /* LoadingAnimationViewController.swift */,
-				DF0B58292B74DE90002DEF8F /* LoadingAnimationViewController.storyboard */,
+				DF0B58272B74DE83002DEF8F /* LoadingAPIRequestViewController.swift */,
+				DF0B58292B74DE90002DEF8F /* LoadingAPIRequestViewController.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 				DF4AE46B2B5C43CD00C7D7C0 /* Models */,
 				DF3493902B5C537C004BFD68 /* DetailsCard */,
 				DF4AE45D2B5C2FA600C7D7C0 /* ListCredCards */,
-				DF0B58262B74DE33002DEF8F /* LoadingAnimation */,
+				DF0B58262B74DE33002DEF8F /* LoadingAPIRequest */,
 				DF4AE4592B5C2D0C00C7D7C0 /* SplashScreen */,
 				DF24F46C2B6A547C00FEE281 /* Resources */,
 				DF4AE4532B5C2C8F00C7D7C0 /* Info.plist */,
@@ -384,7 +384,7 @@
 				DF4AE44F2B5C2C8F00C7D7C0 /* Assets.xcassets in Resources */,
 				DF4AE44D2B5C2C8E00C7D7C0 /* Main.storyboard in Resources */,
 				DF4AE4612B5C2FD900C7D7C0 /* ListCredCardsViewController.storyboard in Resources */,
-				DF0B582A2B74DE90002DEF8F /* LoadingAnimationViewController.storyboard in Resources */,
+				DF0B582A2B74DE90002DEF8F /* LoadingAPIRequestViewController.storyboard in Resources */,
 				DF4AE4652B5C3A3000C7D7C0 /* CredCardsTableViewCell.xib in Resources */,
 				DF4AE4702B5C449600C7D7C0 /* Cards.json in Resources */,
 			);
@@ -414,7 +414,7 @@
 				DF4AE4762B5C45AB00C7D7C0 /* CardsService.swift in Sources */,
 				DF4AE46D2B5C43DB00C7D7C0 /* ListCards.swift in Sources */,
 				DF0B582E2B74E971002DEF8F /* LoadingAnimationViewModel.swift in Sources */,
-				DF0B58282B74DE83002DEF8F /* LoadingAnimationViewController.swift in Sources */,
+				DF0B58282B74DE83002DEF8F /* LoadingAPIRequestViewController.swift in Sources */,
 				DF4AE4462B5C2C8E00C7D7C0 /* AppDelegate.swift in Sources */,
 				DF4AE4642B5C3A3000C7D7C0 /* CredCardsTableViewCell.swift in Sources */,
 				DF706F2F2B5E7FD100782671 /* DetailsCardViewModel.swift in Sources */,

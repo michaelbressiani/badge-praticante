@@ -12,7 +12,7 @@ protocol CardsViewModelProtocol: AnyObject {
     func errorRequest()
 }
 
-class LoadingAnimationViewModel {
+class LoadingAPIRequestViewModel {
     
     private var service = CardsService()
     public var cards: ListCards?

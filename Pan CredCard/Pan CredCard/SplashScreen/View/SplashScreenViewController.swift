@@ -24,8 +24,8 @@ class SplashScreenViewController: UIViewController {
     }
     
     private func navigationLoadingAnimation() {
-        let vcString = String(describing: LoadingAnimationViewController.self)
-        let vc = UIStoryboard(name: vcString, bundle: nil).instantiateViewController(withIdentifier: vcString) as? LoadingAnimationViewController
+        let vcString = String(describing: LoadingAPIRequestViewController.self)
+        let vc = UIStoryboard(name: vcString, bundle: nil).instantiateViewController(withIdentifier: vcString) as? LoadingAPIRequestViewController
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
             self.navigationController?.pushViewController(vc ?? UIViewController(), animated: true)

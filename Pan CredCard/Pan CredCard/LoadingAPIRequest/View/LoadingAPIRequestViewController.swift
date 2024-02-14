@@ -44,7 +44,7 @@ class LoadingAPIRequestViewController: UIViewController {
         let vc = UIStoryboard(name: dcString, bundle: nil).instantiateViewController(identifier: dcString) { coder -> ListCredCardsViewController? in
             return ListCredCardsViewController(coder: coder, listCards: listCards)
         }
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: false)
     }
 }
 
@@ -54,7 +54,11 @@ extension LoadingAPIRequestViewController: CardsViewModelProtocol {
     }
     
     func successRequest() {
-        loadingViewActivityIndicatorView.stopAnimating()
-        navigationListCredCards(listCards: viewModel.listCards())
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
+            self.loadingViewActivityIndicatorView.stopAnimating()
+            self.navigationListCredCards(listCards: self.viewModel.listCards())
+        })
     }
 }
+
+

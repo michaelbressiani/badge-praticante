@@ -37,10 +37,10 @@ class ListCredCardsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UITableView.animate(withDuration: 0.5) {
+        UITableView.animate(withDuration: 2.0) {
             self.listCredCardsTableView.alpha = 1
         }
-        UISearchBar.animate(withDuration: 0.5) {
+        UISearchBar.animate(withDuration: 2.0) {
             self.searchCardSearchBar.alpha = 1
         }
     }
@@ -74,16 +74,16 @@ class ListCredCardsViewController: UIViewController {
             return DetailsCardViewController(coder: coder, card: card)
         }
         
-        UITableView.animate(withDuration: 0.5) {
+        UITableView.animate(withDuration: 1.0) {
                     self.listCredCardsTableView.alpha = 0
                 }
         
-        UISearchBar.animate(withDuration: 0.5) {
+        UISearchBar.animate(withDuration: 1.0) {
             self.searchCardSearchBar.alpha = 0
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-            self.navigationController?.pushViewController(vcString, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.navigationController?.pushViewController(vcString, animated: false)
         })
     }
 }

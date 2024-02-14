@@ -46,7 +46,7 @@ class DetailsCardViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 1.0) {
             self.contentViewUIView.alpha = 1
         }
     }
@@ -57,12 +57,12 @@ class DetailsCardViewController: UIViewController {
     }
     
     @objc func backActionNavegation() {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 1.0) {
             self.contentViewUIView.alpha = 0
         }
             
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-        self.navigationController?.popViewController(animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        self.navigationController?.popViewController(animated: false)
         })
     }
     

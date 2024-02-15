@@ -36,7 +36,11 @@ class ListCredCardsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        fadeInListCredCards()
         
+    }
+    
+    private func fadeInListCredCards() {
         UITableView.animate(withDuration: 2.0) {
             self.listCredCardsTableView.alpha = 1
         }
@@ -73,7 +77,14 @@ class ListCredCardsViewController: UIViewController {
         let vcString = UIStoryboard(name: dcString, bundle: nil).instantiateViewController(identifier: dcString) { coder -> DetailsCardViewController? in
             return DetailsCardViewController(coder: coder, card: card)
         }
+        fadeOutLisCredtCards()
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.navigationController?.pushViewController(vcString, animated: false)
+        })
+    }
+    
+    private func fadeOutLisCredtCards() {
         UITableView.animate(withDuration: 1.0) {
                     self.listCredCardsTableView.alpha = 0
                 }
@@ -81,10 +92,6 @@ class ListCredCardsViewController: UIViewController {
         UISearchBar.animate(withDuration: 1.0) {
             self.searchCardSearchBar.alpha = 0
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            self.navigationController?.pushViewController(vcString, animated: false)
-        })
     }
 }
 

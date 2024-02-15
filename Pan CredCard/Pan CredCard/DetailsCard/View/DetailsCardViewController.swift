@@ -45,7 +45,10 @@ class DetailsCardViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        fadeInDetailsCard()
+    }
+    
+    private func fadeInDetailsCard() {
         UIView.animate(withDuration: 1.0) {
             self.contentViewUIView.alpha = 1
         }

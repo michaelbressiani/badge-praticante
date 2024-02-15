@@ -8,7 +8,7 @@ import UIKit
 
 class ListCredCardsViewController: UIViewController {
     
-
+    
     @IBOutlet weak var searchCardSearchBar: UISearchBar!
     @IBOutlet weak var listCredCardsTableView: UITableView!
     
@@ -32,6 +32,7 @@ class ListCredCardsViewController: UIViewController {
         initialConfigs()
         configSeachBar()
         configTableView()
+        accessibilitySearchBar()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,12 +87,17 @@ class ListCredCardsViewController: UIViewController {
     
     private func fadeOutLisCredtCards() {
         UITableView.animate(withDuration: 1.0) {
-                    self.listCredCardsTableView.alpha = 0
-                }
+            self.listCredCardsTableView.alpha = 0
+        }
         
         UISearchBar.animate(withDuration: 1.0) {
             self.searchCardSearchBar.alpha = 0
         }
+    }
+    
+    private func accessibilitySearchBar() {
+        searchCardSearchBar.isAccessibilityElement = true
+        searchCardSearchBar.accessibilityHint = "Essa é a barra de busca de cartões"
     }
 }
 

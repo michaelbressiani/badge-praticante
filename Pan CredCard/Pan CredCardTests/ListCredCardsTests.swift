@@ -12,55 +12,75 @@ final class ListCredCardsTests: XCTestCase {
     
     var listCredCardsViewModel: ListCredCardsViewModel!
     var imageString: ImageString!
-    var card: Card!
+    var cardSearch: [Card]!
+    var listCard: [Card]!
     var cardEmpty: Card!
     
     override func setUpWithError() throws {
         listCredCardsViewModel = ListCredCardsViewModel()
         imageString = ImageString()
-        card = Card(id: 1, name: "Test" , alias: "Test", credit: true, debit: true, number: "1", codSec: "1", image: "1")
+        cardSearch = [Card(id: 1, name: "Test" , alias: "Test", credit: true, debit: true, number: "1", codSec: "1", image: "1")]
+        listCard = [Card(id: 1, name: "Test" , alias: "Test", credit: true, debit: true, number: "1", codSec: "1", image: "1"), Card(id: 2, name: "Test2" , alias: "Test2", credit: true, debit: true, number: "2", codSec: "2", image: "2")]
     }
     
     override func tearDownWithError() throws {
         listCredCardsViewModel = nil
         imageString = nil
-        card = nil
+        cardSearch = nil
+        listCard = nil
         cardEmpty = nil
     }
     
     func testNumberOfRows() throws {
         
-        listCredCardsViewModel.cards = ListCards(cards: [card])
-        let numberOfRows = listCredCardsViewModel.numberOfRows()
-        XCTAssertEqual(numberOfRows, 1)
+        let numberOfRowsTestTrue = listCredCardsViewModel.numberOfRows(searching: true, searchCardName: cardSearch, listCards: listCard)
+        XCTAssertEqual(numberOfRowsTestTrue, 1)
         
-        listCredCardsViewModel.cards = nil
-        let numberOfRowsZero = listCredCardsViewModel.numberOfRows()
-        XCTAssertEqual(numberOfRowsZero, 0)
+        let numberOfRowsTestFalse = listCredCardsViewModel.numberOfRows(searching: false, searchCardName: cardSearch, listCards: listCard)
+        XCTAssertEqual(numberOfRowsTestFalse, 2)
+
     }
     
-    func testGetCardList() throws {
+    func testCardListFilterName() throws {
         
-        listCredCardsViewModel.cards = ListCards(cards: [card])
-        let indexPath: IndexPath = IndexPath(item: 0, section: 0)
-        let getCards = listCredCardsViewModel.getCardList(indexPath: indexPath)
-        XCTAssertEqual(getCards.id, card.id)
-        XCTAssertEqual(getCards.name, card.name)
-        XCTAssertEqual(getCards.alias, card.alias)
-        XCTAssertEqual(getCards.number, card.number)
-        XCTAssertEqual(getCards.codSec, card.codSec)
-        XCTAssertEqual(getCards.image, card.image)
-        
-        listCredCardsViewModel.cards = nil
-        let getCardsNil = listCredCardsViewModel.getCardList(indexPath: indexPath)
-        let cardEmpty = listCredCardsViewModel.cardEmpty
-        XCTAssertEqual(getCardsNil.id, cardEmpty.id)
-        XCTAssertEqual(getCardsNil.name, cardEmpty.name)
-        XCTAssertEqual(getCardsNil.alias, cardEmpty.alias)
-        XCTAssertEqual(getCardsNil.number, cardEmpty.number)
-        XCTAssertEqual(getCardsNil.codSec, cardEmpty.codSec)
-        XCTAssertEqual(getCardsNil.image, cardEmpty.image)
+       let searchText = "Test2"
+       let listFilterCards = listCredCardsViewModel.cardListFilterName(searchText: searchText, listCards: listCard)
+        XCTAssertEqual(listFilterCards[0].id, listCard[1].id)
+        XCTAssertEqual(listFilterCards[0].name, listCard[1].name)
+        XCTAssertEqual(listFilterCards[0].alias, listCard[1].alias)
+        XCTAssertEqual(listFilterCards[0].number, listCard[1].number)
+        XCTAssertEqual(listFilterCards[0].credit, listCard[1].credit)
+        XCTAssertEqual(listFilterCards[0].debit, listCard[1].debit)
+        XCTAssertEqual(listFilterCards[0].codSec, listCard[1].codSec)
+        XCTAssertEqual(listFilterCards[0].image, listCard[1].image)
     }
+    
+    func testCardFilterConfig() throws {
+        let indexPath = IndexPath(item: 0, section: 0)
+        
+        let cardFilterConfigTestTrue = listCredCardsViewModel.cardFilterConfig(searching: true, searchCardName: cardSearch, listCards: listCard, indexPath: indexPath)
+        
+        XCTAssertEqual(cardFilterConfigTestTrue.id, cardSearch[indexPath.row].id)
+        XCTAssertEqual(cardFilterConfigTestTrue.name, cardSearch[indexPath.row].name)
+        XCTAssertEqual(cardFilterConfigTestTrue.alias, cardSearch[indexPath.row].alias)
+        XCTAssertEqual(cardFilterConfigTestTrue.number, cardSearch[indexPath.row].number)
+        XCTAssertEqual(cardFilterConfigTestTrue.credit, cardSearch[indexPath.row].credit)
+        XCTAssertEqual(cardFilterConfigTestTrue.debit, cardSearch[indexPath.row].debit)
+        XCTAssertEqual(cardFilterConfigTestTrue.codSec, cardSearch[indexPath.row].codSec)
+        XCTAssertEqual(cardFilterConfigTestTrue.image, cardSearch[indexPath.row].image)
+        
+        let cardFilterConfigTestFalse = listCredCardsViewModel.cardFilterConfig(searching: false, searchCardName: cardSearch, listCards: listCard, indexPath: indexPath)
+        
+        XCTAssertEqual(cardFilterConfigTestFalse.id, listCard[indexPath.row].id)
+        XCTAssertEqual(cardFilterConfigTestFalse.name, listCard[indexPath.row].name)
+        XCTAssertEqual(cardFilterConfigTestFalse.alias, listCard[indexPath.row].alias)
+        XCTAssertEqual(cardFilterConfigTestFalse.number, listCard[indexPath.row].number)
+        XCTAssertEqual(cardFilterConfigTestFalse.credit, listCard[indexPath.row].credit)
+        XCTAssertEqual(cardFilterConfigTestFalse.debit, listCard[indexPath.row].debit)
+        XCTAssertEqual(cardFilterConfigTestFalse.codSec, listCard[indexPath.row].codSec)
+        XCTAssertEqual(cardFilterConfigTestFalse.image, listCard[indexPath.row].image)
+    }
+    
     
     func testConvertBase64ToImage() throws {
         

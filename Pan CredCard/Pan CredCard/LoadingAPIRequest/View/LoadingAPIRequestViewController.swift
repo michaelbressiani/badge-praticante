@@ -56,7 +56,7 @@ extension LoadingAPIRequestViewController: CardsViewModelProtocol {
     func successRequest() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, execute: {
             self.loadingViewActivityIndicatorView.stopAnimating()
-            self.navigationListCredCards(listCards: self.viewModel.listCards())
+            self.navigationListCredCards(listCards: self.viewModel.getListCards())
         })
     }
 }

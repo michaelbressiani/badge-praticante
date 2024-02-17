@@ -31,7 +31,7 @@ class LoadingAPIRequestViewModel {
         }
     }
     
-    public func listCards() -> [Card] {
+    public func getListCards() -> [Card] {
         return cards?.cards ?? [cardEmpty]
     }
 }
